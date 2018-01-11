@@ -64,13 +64,19 @@ class Game:
                 for x in range(self.window_x):
                     if info_bottom - 1 > y > info_top + 1:
                         if info_left + 1 < x < info_right - 1:
-                            world[y][x] = 2
+                            world[y][x] = 6
 
             # places hero and enemy in world and instantiates them
             world[player_y_start][player_x_start] = 3
             world[enemy_y_start][enemy_x_start] = 4
             player = Player(player_x_start, player_y_start)
             enemy = Enemy(enemy_x_start, enemy_y_start)
+
+            world[6][60] = 7
+            world[6][61] = 9
+            world[6][62] = 20
+            world[6][63] = 21
+            world[6][64] = 20
 
             return world, player, enemy
 
@@ -101,21 +107,49 @@ class Game:
     def tile_lookup(self, key):
         key = int(key)
         if key == 0:
-            return "."
+            return "🔲"
         if key == 1:
-            return "#"
+            return "⬜"
         if key == 2:
-            return " "
+            return "⬛"
         if key == 3:
-            return "G"
+            return "🧔"
         if key == 4:
-            return "E"
+            return "🧟"
         if key == 5:
-            return "+"
+            return "💟"
         if key == 6:
-            return "-"
+            return "  "
         if key == 7:
-            return "|"
+            return "HP"
+        if key == 8:
+            return "PT"
+        if key == 9:
+            return ": "
+        if key == 10:
+            return " 0"
+        if key == 11:
+            return " 1"
+        if key == 12:
+            return " 2"
+        if key == 13:
+            return " 3"
+        if key == 14:
+            return " 4"
+        if key == 15:
+            return " 5"
+        if key == 16:
+            return " 6"
+        if key == 17:
+            return " 7"
+        if key == 18:
+            return " 8"
+        if key == 19:
+            return " 9"
+        if key == 20:
+            return "10"
+        if key == 21:
+            return " /"
         return "?"
 
     def do_turn(self, key_press):
@@ -123,16 +157,16 @@ class Game:
         if key_press == 113:
             return 0
         if key_press == 119:   # up
-            self.player.up(self.world)
+            self.player.up(self.world, self.enemy)
             # print("up")
         if key_press == 97:    # left
-            self.player.left(self.world)
+            self.player.left(self.world, self.enemy)
             # print("left")
         if key_press == 115:   # down
-            self.player.down(self.world)
+            self.player.down(self.world, self.enemy)
             # print("down")
         if key_press == 100:   # right
-            self.player.right(self.world)
+            self.player.right(self.world, self.enemy)
             # print("right")
         if key_press == 32:   # potion
             self.player.potion(self.world)

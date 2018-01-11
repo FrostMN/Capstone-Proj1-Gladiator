@@ -1,10 +1,13 @@
 class Enemy:
     hp = int
+    dr = int
     enemy_x = int
     enemy_y = int
 
     def __init__(self, x, y):
         self.hp = 10
+        self.dr = 1
+        self.attack = 2
         self.enemy_x = x
         self.enemy_y = y
 
@@ -38,6 +41,12 @@ class Enemy:
             world[self.enemy_y][self.enemy_x] = 2
             self.enemy_x += 1
 
+        return
+
+    def defend(self, att, world):
+        self.hp -= att - self.dr
+        if self.hp == 0:
+            world[self.enemy_y][self.enemy_x] = 2
         return
 
     def potion(self):

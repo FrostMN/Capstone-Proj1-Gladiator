@@ -16,6 +16,7 @@ def main(stdscr):
         curses.curs_set(0)
         if first_run:
             first_run = setup_screen(stdscr)
+            print("\x1b[8;24;160t")
         if c != -1:
             print(app.get_view())
             stdscr.refresh()
